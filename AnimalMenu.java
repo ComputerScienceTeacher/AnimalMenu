@@ -8,6 +8,8 @@ import javax.sound.sampled.*;
  * This is a class that builds a menu for animal sounds
  * @extends JFrame
  * @implements ActionListener
+ * 
+ * This change was made to my project.
  */
 public class AnimalMenu extends JFrame implements ActionListener  
 {  
