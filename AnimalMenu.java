@@ -8,53 +8,29 @@ import javax.sound.sampled.*;
  * This is a class that builds a menu for animal sounds
  * @extends JFrame
  * @implements ActionListener
- * 
- * This change was made to my project.
  */
 public class AnimalMenu extends JFrame implements ActionListener  
 {  
-    private JMenu menu1, menu2, menu3, submenu1, submenu2;  
-    private JMenuItem i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11;  
+    private JMenu menu1, menu2, menu3,menu4, submenu1, submenu2;  
+    private JMenuItem i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, j1, j2, j3, j4, j5, j6;  
     private JLabel mainLabel, label, imageLabel;
     private JTextField textField;
     private JPanel panel;
-    private JMenuBar mb;
     private JButton button1,button2;
     private JFrame f;
     private Image icon;
     private Clip currentSound;
     
-    
-    public JLabel getLabel(){
-        return label;
-    }
-    
-    public JFrame getFrame(){
-        return f;
-    }
-    
-    public JLabel getImageLabel(){
-        return imageLabel;
-    }
-    
-    public JButton getButton1(){
-        return button1;
-    }
-    
-    public void setImageLabel(JLabel icon){
-        imageLabel = icon;
-    }
-    
     AnimalMenu(){  
       f= new JFrame("How do animals sound?");  
-      mb=new JMenuBar();
+      JMenuBar mb=new JMenuBar();
       label = new JLabel(" ");
       mainLabel = new JLabel("Please select a menu option");
       ImageIcon icon = new ImageIcon("Chad_Whiteley.jpg");
       Image iconImage = icon.getImage();
       Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
       icon = new ImageIcon(newImage);
-      imageLabel = new JLabel(icon);
+      JLabel imageLabel = new JLabel(icon);
 
       //first menu bar
       menu1=new JMenu("Marsupials");    
@@ -88,7 +64,23 @@ public class AnimalMenu extends JFrame implements ActionListener
       i11.addActionListener(this);
       menu3.add(i10); menu3.add(i11);  
       mb.add(menu3); 
-
+      
+      //fourth menu bar
+      menu4 = new JMenu ("Cryptozoology");
+      j1=new JMenuItem("Hyppogriff");
+      j1.addActionListener(this);
+      j2=new JMenuItem("Phoenix");
+      j2.addActionListener(this);
+      j3=new JMenuItem("Goblins");
+      j3.addActionListener(this);
+      j4=new JMenuItem("Ogre");
+      j4.addActionListener(this);
+      j5=new JMenuItem("Fairy");
+      j5.addActionListener(this);
+      j6=new JMenuItem("Basilisk");
+      j6.addActionListener(this);
+      menu4.add(j1);menu4.add(j2);menu4.add(j3);menu4.add(j4);menu4.add(j5);menu4.add(j6);
+      mb.add(menu4);
       
       f.setJMenuBar(mb);  
       f.setSize(400,400);  
@@ -111,7 +103,26 @@ public class AnimalMenu extends JFrame implements ActionListener
      * @param   soundFile - the sound that the animal makes
      */
     public void animalGUI(String animal, Image iconImage, String soundFile){
+          label.setText(animal);
+          f.getContentPane().removeAll();
+          f.repaint();
+          f.add(label);
           
+          InputStream path = getClass().getResourceAsStream(soundFile);
+          
+              try{
+                currentSound = AudioSystem.getClip();
+                currentSound.open(AudioSystem.getAudioInputStream(path));
+            
+              }catch(Exception fail){}
+              
+          ImageIcon icon= new ImageIcon(iconImage);
+          imageLabel = new JLabel(icon);
+          button1.setVisible(true);
+          f.add(imageLabel);
+          f.add(button1);
+          f.revalidate();
+
     }
     
     /**
@@ -129,17 +140,41 @@ public class AnimalMenu extends JFrame implements ActionListener
      * action events from the menu and JFrame buttons. 
      */
     public void actionPerformed(ActionEvent e) {    
-        if(e.getSource()==i10){    
-            ImageIcon icon = new ImageIcon("gorilla.jpg");
+        if(e.getSource()==j1){    
+            ImageIcon icon = new ImageIcon("hippogriff.jpg");
             Image iconImage = icon.getImage();
             Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
-            new primate(this,"Gorilla", newImage, "gorilla.wav");
+            animalGUI("Hippogriff", newImage, "hippogriff.wav");
         }
-        if(e.getSource()==i11){
-            ImageIcon icon = new ImageIcon("human.jfif");
+        if(e.getSource()==j2){
+            ImageIcon icon = new ImageIcon("phoenix.jpg");
             Image iconImage = icon.getImage();
             Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
-            animalGUI("Human",newImage, "human.wav");
+            animalGUI("Phoenix",newImage, "phoenix.wav");
+        }
+        if(e.getSource()==j3){    
+            ImageIcon icon = new ImageIcon("goblins.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Goblins", newImage, "goblins.wav");
+        }
+        if(e.getSource()==j4){    
+            ImageIcon icon = new ImageIcon("ogre.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Ogre", newImage, "ogre.wav");
+        }
+        if(e.getSource()==j5){    
+            ImageIcon icon = new ImageIcon("fairy.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Fairy", newImage, "fairy.wav");
+        }
+        if(e.getSource()==j6){    
+            ImageIcon icon = new ImageIcon("basilisk.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Basilisk", newImage, "basilisk.wav");
         }
         if (e.getSource()==button1){
             currentSound.start();
@@ -154,6 +189,6 @@ public class AnimalMenu extends JFrame implements ActionListener
     
     public static void main(String [] args)  
     {  
-      new AnimalMenu();  
+      new MenuExample();  
     }
 }  
