@@ -65,6 +65,7 @@ public class AnimalMenu extends JFrame implements ActionListener
       i11.addActionListener(this);
       menu3.add(i10); menu3.add(i11);  
       mb.add(menu3); 
+
       
       f.setJMenuBar(mb);  
       f.setSize(400,400);  
