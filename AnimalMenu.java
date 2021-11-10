@@ -8,6 +8,8 @@ import javax.sound.sampled.*;
  * This is a class that builds a menu for animal sounds
  * @extends JFrame
  * @implements ActionListener
+ * 
+ * This change was made to my project.
  */
 public class AnimalMenu extends JFrame implements ActionListener  
 {  
@@ -21,6 +23,27 @@ public class AnimalMenu extends JFrame implements ActionListener
     private JFrame f;
     private Image icon;
     private Clip currentSound;
+    
+    
+    public JLabel getLabel(){
+        return label;
+    }
+    
+    public JFrame getFrame(){
+        return f;
+    }
+    
+    public JLabel getImageLabel(){
+        return imageLabel;
+    }
+    
+    public JButton getButton1(){
+        return button1;
+    }
+    
+    public void setImageLabel(JLabel icon){
+        imageLabel = icon;
+    }
     
     AnimalMenu(){  
       f= new JFrame("How do animals sound?");  
@@ -88,26 +111,7 @@ public class AnimalMenu extends JFrame implements ActionListener
      * @param   soundFile - the sound that the animal makes
      */
     public void animalGUI(String animal, Image iconImage, String soundFile){
-          label.setText(animal);
-          f.getContentPane().removeAll();
-          f.repaint();
-          f.add(label);
           
-          InputStream path = getClass().getResourceAsStream(soundFile);
-          
-              try{
-                currentSound = AudioSystem.getClip();
-                currentSound.open(AudioSystem.getAudioInputStream(path));
-            
-              }catch(Exception fail){}
-              
-          ImageIcon icon= new ImageIcon(iconImage);
-          imageLabel = new JLabel(icon);
-          button1.setVisible(true);
-          f.add(imageLabel);
-          f.add(button1);
-          f.revalidate();
-
     }
     
     /**
@@ -129,7 +133,7 @@ public class AnimalMenu extends JFrame implements ActionListener
             ImageIcon icon = new ImageIcon("gorilla.jpg");
             Image iconImage = icon.getImage();
             Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
-            animalGUI("Gorilla", newImage, "gorilla.wav");
+            new primate(this,"Gorilla", newImage, "gorilla.wav");
         }
         if(e.getSource()==i11){
             ImageIcon icon = new ImageIcon("human.jfif");
