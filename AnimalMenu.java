@@ -3,95 +3,87 @@ import java.awt.event.*;
 import java.awt.*;
 import java.io.InputStream;
 import javax.sound.sampled.*;
- 
+
 /**
  * This is a class that builds a menu for animal sounds
  * @extends JFrame
  * @implements ActionListener
- * 
- * This change was made to my project.
  */
-public class AnimalMenu extends JFrame implements ActionListener  
-{  
-    private JMenu menu1, menu2, menu3, submenu1, submenu2;  
-    private JMenuItem i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11;  
+public class AnimalMenu extends JFrame implements ActionListener
+{
+    private JMenu menu1, menu2, menu3,menu4, submenu1, submenu2;
+    private JMenuItem i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, j1, j2, j3, j4, j5, j6;
     private JLabel mainLabel, label, imageLabel;
     private JTextField textField;
     private JPanel panel;
-    private JMenuBar mb;
     private JButton button1,button2;
     private JFrame f;
     private Image icon;
     private Clip currentSound;
-    
-    
-    public JLabel getLabel(){
-        return label;
-    }
-    
-    public JFrame getFrame(){
-        return f;
-    }
-    
-    public JLabel getImageLabel(){
-        return imageLabel;
-    }
-    
-    public JButton getButton1(){
-        return button1;
-    }
-    
-    public void setImageLabel(JLabel icon){
-        imageLabel = icon;
-    }
-    
-    AnimalMenu(){  
-      f= new JFrame("How do animals sound?");  
-      mb=new JMenuBar();
+
+    AnimalMenu(){
+      f= new JFrame("How do animals sound?");
+      JMenuBar mb=new JMenuBar();
       label = new JLabel(" ");
       mainLabel = new JLabel("Please select a menu option");
       ImageIcon icon = new ImageIcon("Chad_Whiteley.jpg");
       Image iconImage = icon.getImage();
       Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
       icon = new ImageIcon(newImage);
-      imageLabel = new JLabel(icon);
+      JLabel imageLabel = new JLabel(icon);
 
       //first menu bar
-      menu1=new JMenu("Marsupials");    
-      i1=new JMenuItem("Kangaroo");  
-      i2=new JMenuItem("Opossum");  
-      i3=new JMenuItem("Koala");  
-      i4=new JMenuItem("Wallaby");  
-      i5=new JMenuItem("Wombat");  
+      menu1=new JMenu("Marsupials");
+      i1=new JMenuItem("Kangaroo");
+      i2=new JMenuItem("Opossum");
+      i3=new JMenuItem("Koala");
+      i4=new JMenuItem("Wallaby");
+      i5=new JMenuItem("Wombat");
       menu1.add(i1); menu1.add(i2); menu1.add(i3); menu1.add(i4); menu1.add(i5);
-      //submenu1.add(i4); submenu1.add(i5);  
-      //menu1.add(submenu1);  
-      mb.add(menu1);  
-      
+      //submenu1.add(i4); submenu1.add(i5);
+      //menu1.add(submenu1);
+      mb.add(menu1);
+
       //second menu bar
       menu2 = new JMenu ("Snakes");
-      submenu1 = new JMenu("Poinous Snakes");      
+      submenu1 = new JMenu("Poinous Snakes");
       submenu2 = new JMenu("Non-poisonous Snakes");
-      i6=new JMenuItem("Cobra");  
-      i7=new JMenuItem("Water Moccasin");  
-      i8=new JMenuItem("Copperhead");  
+      i6=new JMenuItem("Cobra");
+      i7=new JMenuItem("Water Moccasin");
+      i8=new JMenuItem("Copperhead");
       i9=new JMenuItem("Rattlesnake");
-      submenu1.add(i6); submenu1.add(i7); submenu1.add(i8); submenu1.add(i9);  
-      menu2.add(submenu1); menu2.add(submenu2);      
+      submenu1.add(i6); submenu1.add(i7); submenu1.add(i8); submenu1.add(i9);
+      menu2.add(submenu1); menu2.add(submenu2);
       mb.add(menu2);
-      
+
       //third menu bar
-      menu3=new JMenu("Primate");     
+      menu3=new JMenu("Primate");
       i10=new JMenuItem("Gorilla");
       i10.addActionListener(this);
       i11=new JMenuItem("Human");
       i11.addActionListener(this);
-      menu3.add(i10); menu3.add(i11);  
-      mb.add(menu3); 
+      menu3.add(i10); menu3.add(i11);
+      mb.add(menu3);
 
-      
-      f.setJMenuBar(mb);  
-      f.setSize(400,400);  
+      //fourth menu bar
+      menu4 = new JMenu ("Cryptozoology");
+      j1=new JMenuItem("Hyppogriff");
+      j1.addActionListener(this);
+      j2=new JMenuItem("Phoenix");
+      j2.addActionListener(this);
+      j3=new JMenuItem("Goblins");
+      j3.addActionListener(this);
+      j4=new JMenuItem("Ogre");
+      j4.addActionListener(this);
+      j5=new JMenuItem("Fairy");
+      j5.addActionListener(this);
+      j6=new JMenuItem("Basilisk");
+      j6.addActionListener(this);
+      menu4.add(j1);menu4.add(j2);menu4.add(j3);menu4.add(j4);menu4.add(j5);menu4.add(j6);
+      mb.add(menu4);
+
+      f.setJMenuBar(mb);
+      f.setSize(400,400);
       f.setLayout(new FlowLayout());
       label.setText("Please select an option above.");
       f.add(label);
@@ -102,10 +94,10 @@ public class AnimalMenu extends JFrame implements ActionListener
       button1.setVisible(false);
       f.add(button1);
     }
-    
+
     /**
      * This is the method that sets up the animal GUI
-     * 
+     *
      * @param   animal - the name of the animal that is being set up
      * @param   iconImage - the picture of the animal
      * @param   soundFile - the sound that the animal makes
@@ -130,48 +122,73 @@ public class AnimalMenu extends JFrame implements ActionListener
           f.add(imageLabel);
           f.add(button1);
           f.revalidate();
+
     }
-    
+
     /**
      * This tests to see if a String can be a number.
-     * 
+     *
      * @param s - the String being tested
      */
-    public boolean isNumeric(String s) {  
-        return s != null && s.matches("[-+]?\\d*\\.?\\d+");  
-    } 
-    
-    
+    public boolean isNumeric(String s) {
+        return s != null && s.matches("[-+]?\\d*\\.?\\d+");
+    }
+
+
     /**
      * This is the actionPerformed class that accepts
-     * action events from the menu and JFrame buttons. 
+     * action events from the menu and JFrame buttons.
      */
-    public void actionPerformed(ActionEvent e) {    
-        if(e.getSource()==i10){    
-            ImageIcon icon = new ImageIcon("gorilla.jpg");
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==j1){
+            ImageIcon icon = new ImageIcon("hippogriff.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Hippogriff", newImage, "hippogriff.wav");
+        }
+        if(e.getSource()==j2){
+            ImageIcon icon = new ImageIcon("phoenix.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Phoenix",newImage, "phoenix.wav");
+        }
+        if(e.getSource()==j3){
+            ImageIcon icon = new ImageIcon("goblins.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Goblins", newImage, "goblins.wav");
+        }
+        if(e.getSource()==j4){
+            ImageIcon icon = new ImageIcon("ogre.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Ogre", newImage, "ogre.wav");
+        }
+        if(e.getSource()==j5){
+            ImageIcon icon = new ImageIcon("fairy.jpg");
             Image iconImage = icon.getImage();
             Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
             animalGUI("Gorilla", newImage, "gorilla.wav");
         }
-        if(e.getSource()==i11){
-            ImageIcon icon = new ImageIcon("human.jfif");
+        if(e.getSource()==j6){
+            ImageIcon icon = new ImageIcon("basilisk.jpg");
             Image iconImage = icon.getImage();
             Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
-            animalGUI("Human",newImage, "human.wav");
+            animalGUI("Basilisk", newImage, "basilisk.wav");
         }
         if (e.getSource()==button1){
             currentSound.start();
         }
-    }     
-    
+    }
+
     /**
      * This is the main method whereby everything else runs
-     * 
+     *
      * @param   args - the array of Strings that help run the program.
      */
-    
-    public static void main(String [] args)  
-    {  
-      new AnimalMenu();  
+
+    public static void main(String [] args)
+    {
+      new MenuExample();
     }
-}  
+}
