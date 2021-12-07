@@ -12,7 +12,7 @@ import javax.sound.sampled.*;
 public class AnimalMenu extends JFrame implements ActionListener
 {
     private JMenu menu1, menu2, menu3,menu4, submenu1, submenu2;
-    private JMenuItem i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, j1, j2, j3, j4, j5, j6;
+    private JMenuItem i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, j1, j2, j3, j4, j5, j6, polarBear, pandaBear, brownBear, blackBear, sunBear;
     private JLabel mainLabel, label, imageLabel;
     private JTextField textField;
     private JPanel panel;
@@ -81,6 +81,23 @@ public class AnimalMenu extends JFrame implements ActionListener
       j6.addActionListener(this);
       menu4.add(j1);menu4.add(j2);menu4.add(j3);menu4.add(j4);menu4.add(j5);menu4.add(j6);
       mb.add(menu4);
+      
+      bearMenu = new JMenu("Bears");
+      polarBear = new JMenuItem("Polar Bear");
+      polarBear.addActionListener(this);
+      pandaBear = new JMenuItem("Panda Bear");
+      pandaBear.addActionListener(this);
+      brownBear = new JMenuItem("Brown Bear");
+      brownBear.addActionListener(this);
+      blackBear = new JMenuItem("Black Bear");
+      blackBear.addActionListener(this);
+      sunBear = new JMenuItem("Sun Bear");
+      sunBear.addActionListener(this);
+      
+      bearMenu.add(polarBear); bearMenu.add(pandaBear); bearMenu.add(brownBear);
+      bearMenu.add(blackBear); bearMenu.add(sunBear);
+      mb.add(bearMenu);
+
 
       f.setJMenuBar(mb);
       f.setSize(400,400);
@@ -175,6 +192,36 @@ public class AnimalMenu extends JFrame implements ActionListener
             Image iconImage = icon.getImage();
             Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
             animalGUI("Basilisk", newImage, "basilisk.wav");
+        if(e.getSource()==polarBear){
+            ImageIcon icon = new ImageIcon("Polar_Bear.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Polar Bear",newImage, "polarbear.wav");
+        }
+        if(e.getSource()==pandaBear){
+            ImageIcon icon = new ImageIcon("Panda-Bear.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Panda Bear",newImage, "panda.wav");
+        }
+        if(e.getSource()==brownBear){
+            ImageIcon icon = new ImageIcon("Brown_Bear.jpeg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Brown Bear",newImage, "Grizzly.wav");
+        }
+        if(e.getSource()==blackBear){
+            ImageIcon icon = new ImageIcon("Black_Bear.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Black Bear",newImage, "black.wav");
+        }
+        if(e.getSource()==sunBear){
+            ImageIcon icon = new ImageIcon("Sun_Bear.jpg");
+            Image iconImage = icon.getImage();
+            Image newImage = iconImage.getScaledInstance(120,120, java.awt.Image.SCALE_SMOOTH);
+            animalGUI("Sun Bear",newImage, "sun.wav");
+
         }
         if (e.getSource()==button1){
             currentSound.start();
